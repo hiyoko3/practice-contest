@@ -124,4 +124,13 @@ func main() {
 	fmt.Println(needInt(Small))
 	fmt.Println(needFloat(Small))
 	fmt.Println(needFloat(Big))
+
+	v := 42
+	fmt.Println("v is of type %T¥n", v)
+
+	const World = "世界"
+	const Truth = true
+	fmt.Println("Hello", World)
+	fmt.Println("Happy", "Day", Truth)
+
 }
