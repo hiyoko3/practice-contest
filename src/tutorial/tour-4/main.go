@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -210,6 +211,102 @@ func appendSlice() {
 	appendPrintSlice(s)
 }
 
+func rangeGo() {
+	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+}
+
+func rangeContinued() {
+	pow := make([]int, 10)
+	for i := range pow {
+		pow[i] = 1 << uint(i) // == 2**i
+	}
+	for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+}
+
+// func Pic(dx, dy int) [][]uint8 {
+// 	return nil
+// }
+
+type MapVertex struct {
+	Lat, Long float64
+}
+
+func mapGo() {
+	var m map[string]MapVertex
+	m = make(map[string]MapVertex)
+	m["Bell Labs"] = MapVertex{
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["Bell Labs"])
+}
+
+func mapLiterals() {
+
+	var m = map[string]MapVertex{
+		// MapVertex は省略も可能
+		"Bell Labs": MapVertex{
+			40.68433, -74.39967,
+		},
+		"Google": MapVertex{
+			37.42202, -122.08408,
+		},
+	}
+	fmt.Println(m)
+}
+
+func mutatingMaps() {
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value:", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value:", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value:", m["Answer"])
+
+	v, ok := m["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
+}
+
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func functionValues() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println(hypot(5, 12))
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func functionClosures() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+
 func main() {
 	pointers()
 
@@ -229,4 +326,14 @@ func main() {
 	maikingSlices()
 	slicesOfSlice()
 	appendSlice()
+	rangeGo()
+
+	// pic.Show(Pic)
+
+	mapGo()
+	mapLiterals()
+	mutatingMaps()
+
+	functionValues()
+	functionClosures()
 }
