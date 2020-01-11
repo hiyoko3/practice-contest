@@ -307,33 +307,140 @@ func functionClosures() {
 	}
 }
 
+type methodVertex struct {
+	X, Y float64
+}
+
+func (v methodVertex) methodsAbs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func funcMethods() {
+	v := methodVertex{3, 4}
+	fmt.Println(v.methodsAbs())
+}
+
+type continueFloat float64
+
+func (f continueFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+func funcMethodContinue() {
+	f := continueFloat(-math.Sqrt2)
+	fmt.Println(f.Abs())
+}
+
+type methodsPointerVertex struct {
+	X, Y float64
+}
+
+func methodsPointerAbs(v methodsPointerVertex) float64 {
+	return math.Sqrt(v.X * v.X * v.Y * v.Y)
+}
+
+func methodPointerScale(v *methodsPointerVertex, f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func funcMethodsPointerExplained() {
+	mpv := methodsPointerVertex{3, 4}
+	methodPointerScale(&mpv, 10)
+	fmt.Println(methodsPointerAbs(mpv))
+}
+
+type IndirectionVertex struct {
+	X, Y float64
+}
+
+func (v *IndirectionVertex) IndirectionScale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func IndirectionScaleFunc(v *IndirectionVertex, f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func indirection() {
+	v := IndirectionVertex{3, 4}
+	v.IndirectionScale(2)
+	IndirectionScaleFunc(&v, 10)
+
+	p := &IndirectionVertex{4, 3}
+	p.IndirectionScale(3)
+	IndirectionScaleFunc(p, 8)
+
+	fmt.Println(v, p)
+}
+
+type InterfaceAbser interface {
+	InterfaceAbs() float64
+}
+type InterfaceMyFloat float64
+
+func (f InterfaceMyFloat) InterfaceAbs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+func (v *IndirectionVertex) InterfaceAbs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+func Interface() {
+	var a InterfaceAbser
+	f := InterfaceMyFloat(-math.Sqrt2)
+	v := IndirectionVertex{3, 4}
+
+	a = f  // a MyFloat implements Abser
+	a = &v // a *Vertex implements Abser
+
+	// In the following line, v is a Vertex (not *Vertex)
+	// and does NOT implement Abser.
+	// a = v
+
+	fmt.Println(a.InterfaceAbs())
+}
+
 func main() {
-	pointers()
+	// pointers()
 
-	fmt.Println(Vertex{1, 2})
+	// fmt.Println(Vertex{1, 2})
 
-	structFields()
-	structPointer()
-	structLiterals()
+	// structFields()
+	// structPointer()
+	// structLiterals()
 
-	array()
-	slices()
-	slicesPointers()
-	sliceLiterals()
-	sliceBounds()
-	sliceLenCap()
-	nilSlices()
-	maikingSlices()
-	slicesOfSlice()
-	appendSlice()
-	rangeGo()
+	// array()
+	// slices()
+	// slicesPointers()
+	// sliceLiterals()
+	// sliceBounds()
+	// sliceLenCap()
+	// nilSlices()
+	// maikingSlices()
+	// slicesOfSlice()
+	// appendSlice()
+	// rangeGo()
 
 	// pic.Show(Pic)
 
-	mapGo()
-	mapLiterals()
-	mutatingMaps()
+	// mapGo()
+	// mapLiterals()
+	// mutatingMaps()
 
 	functionValues()
 	functionClosures()
+	funcMethods()
+	funcMethodContinue()
+	funcMethodsPointerExplained()
+
+	indirection()
 }
