@@ -1,2 +1,5 @@
 pkg
 bin
+*.vscode
+at-coder/*/*
+!at-coder/*/*.cpp
