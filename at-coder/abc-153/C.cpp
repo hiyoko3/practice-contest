@@ -8,7 +8,7 @@ int main() {
 	ll N = 1, K = 0;
 	cin >> N >> K;
 
-	vector<ll> H(N * 10);
+	vector<ll> H(max(N, K), 0);
 	for(ll i = 0; i < N; i++) {
 		cin >> H[i];
 		result += H[i];
