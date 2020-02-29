@@ -3,6 +3,7 @@
 using namespace std;
 typedef long long ll;
 
+const double EPS = numeric_limits<double>::epsilon();
 
 int main() {
 	int tx1, ty1, tx2, ty2, T, V;
@@ -12,7 +13,6 @@ int main() {
 
 	map<int, int> points;
 	string result = "NO";
-	const double EPS = 10e-8;
 
 	repeat(i, N) {
 		int x, y;
