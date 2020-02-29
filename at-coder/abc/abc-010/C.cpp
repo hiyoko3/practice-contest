@@ -5,25 +5,31 @@ typedef long long ll;
 
 
 int main() {
+	int tx1, ty1, tx2, ty2, T, V;
+	cin >> tx1 >> ty1 >> tx2 >> ty2 >> T >> V;
 	int N;
 	cin >> N;
-	vector<ll> A(N, 0);
-	repeat(i, N) {
-		cin >> A[i];
-	}
-	int result = 0;
-	vector<int> passList = {1,3,7,9};
 
-	repeat(i, A.size()) {
-		for(int j = A[i]; j > 0; j--) {
-			auto itr = find(passList.begin(), passList.end(), j);
-			if (itr == passList.end()) {
-				result++;
-			} else {
-				break;
-			}
+	map<int, int> points;
+	string result = "NO";
+	const double EPS = 10e-8;
+
+	repeat(i, N) {
+		int x, y;
+		cin >> x >> y;
+		points.insert(make_pair(x, y));
+	}
+
+	for(auto itr : points) {
+
+		double mid1 = sqrt( pow((itr.first-tx1), 2) + pow((itr.second-ty1), 2) );
+		double mid2 = sqrt( pow((tx2-itr.first), 2) + pow((ty2-itr.second), 2) );
+		if ((mid1 + mid2) <= double(T*V)+EPS) {
+			result = "YES";
+			break;
 		}
 	}
+
 	cout << result << endl;
 	return 0;
 }
