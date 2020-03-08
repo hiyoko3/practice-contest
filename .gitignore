@@ -7,4 +7,6 @@ at-coder/arc/*/*
 !at-coder/arc/*/*.cpp
 at-coder/keyence2020/*
 !at-coder/keyence2020/*.cpp
+at-coder/hitachi2020/*
+!at-coder/hitachi2020/*.cpp
 *.DS_Store
