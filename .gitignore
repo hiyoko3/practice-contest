@@ -1,6 +1,6 @@
 pkg
 bin
 *.vscode
-at-coder/*
-!at-coder/*.cpp
+at-coder/**/*
+!at-coder/**/*.cpp
 *.DS_Store
