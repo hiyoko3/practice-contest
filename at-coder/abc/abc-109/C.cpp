@@ -31,7 +31,6 @@ int main()
 
 		ll diff = abs(X - x);
 		max = gcd(max, diff);
-		cout << max << endl;
 	}
 
 	cout << max << endl;
