@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp>
 
 // increment
 #define rep_n(_1, _2, _3, NAME, ...) NAME
@@ -13,6 +14,7 @@
 // define variable
 using namespace std;
 typedef long long ll;
+using mpint = boost::multiprecision::cpp_int; // 多倍長整数（任意精度）
 typedef pair<int, int> P;
 const double EPS = numeric_limits<double>::epsilon();
 // 最大公約数
