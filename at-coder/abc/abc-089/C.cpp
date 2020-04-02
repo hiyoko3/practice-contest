@@ -41,13 +41,36 @@ vector< pair<ll, ll> > prime_factorize(ll n) {
 }
 
 int main() {
-	ll A, B;
-	cin >> A >> B;
- 
-	ll d = gcd(A, B);
-	
-	vector< pair<ll, ll> > p = prime_factorize(d);
-	
-	cout << (p.size() + 1) << endl;
+	int N;
+	cin >> N;
+	vector< vector<string> > pattern({
+				{"M", "A", "R"},
+				{"M", "A", "C"},
+				{"M", "A", "H"},
+				{"M", "R", "C"},
+				{"M", "R", "H"},
+				{"M", "C", "H"},
+				{"A", "R", "C"},
+				{"A", "R", "H"},
+				{"A", "C", "H"},
+				{"R", "C", "H"}
+	});
+
+	map<string, ll> m;
+
+	repeat(i, N) {
+		string s = "";
+		cin >> s;
+		string s1 = s.substr(0, 1);
+		m[s1]++;
+	}
+
+	ll result = 0;
+	repeat(i, pattern.size()) {
+		vector<string> p = pattern[i];
+		result += m[ p[0] ] * m[ p[1] ] * m[ p[2] ];
+	}
+
+	cout << result << endl;	
 	return 0;
 }
