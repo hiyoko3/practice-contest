@@ -24,17 +24,16 @@ ll lcm(ll a, ll b) { return a / gcd(a, b) * b; }
 // char -> int
 int ctoi(char c) { return (int)(c - '0'); }
 // 素因数分解
-vector<ll> prime_factorize(ll n) {
-	// それぞれの乗数が欲しければ vector< pair<ll, ll> > にする
-	// vector< pair<ll, ll> > p
-	// l35-36. p.push_back(make_pair(i, 0))
-	// l36. p[i].second += 1;
-	// l40. p.push_back(make_pair(n, 0))
-	vector<ll> l;
+vector< pair<ll, ll> > prime_factorize(ll n) {
+	vector< pair<ll, ll> > p;
 	for(ll i = 2; i*i <= n; i++) {
 		if ((n % i) != 0) continue;
-		while((n % i) == 0) { n /= i; }
-		l.push_back(i);
+		p.push_back(make_pair(i, 0));
+		while((n % i) == 0) {
+			n /= i;
+			p[i].second += 1;
+		}
+		p.push_back(make_pair(n, 0));
 	}
 
 	if (n != 1) l.push_back(n);
@@ -47,7 +46,7 @@ int main() {
  
 	ll d = gcd(A, B);
 	
-	vector<ll> p = prime_factorize(d);
+	vector< pair<ll, ll> > p = prime_factorize(d);
 	
 	cout << (p.size() + 1) << endl;
 	return 0;
