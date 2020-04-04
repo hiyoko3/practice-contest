@@ -61,14 +61,14 @@ int main() {
 
 		if (last == 0) {
 			l.push_back(n1);
-			l.push_back(n1+1);
+			l.push_back(n1 + last + 1);
 		} else if (last == 9) {
-			l.push_back(n1 + last-1);
+			l.push_back(n1 + last - 1);
 			l.push_back(n1 + last);
 		} else {
-			l.push_back(n1 + last-1);
+			l.push_back(n1 + last - 1);
 			l.push_back(n1 + last);
-			l.push_back(n1 + last+1);
+			l.push_back(n1 + last + 1);
 		}
 		idx++;
 	}
