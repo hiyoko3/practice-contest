@@ -22,3 +22,4 @@ at-coder/panasonic2020/*
 
 at-coder/yahoo2019/*
 !at-coder/yahoo2019/*.cpp
+!at-coder/yahoo2019/*.py
