@@ -91,24 +91,20 @@ int main() {
 	cin >> K >> A >> B;
 
 	ll k = K, n = 1 + K;
-	ll x = 1, a = 0;
-	while (k > 0) {
-		if (a > 0 && B > A) {
-			x += B;
-			a -= 1;
-			k -= 1;
-			continue;
-		}
+	ll x = 1;
 
-		if (x >= A && B > A && k != 1) {
-			x -= A;
-			a += 1;
-			k -= 1;
-			continue;
-		}
+	if (k > A) {
+		x = B;
+		k -= A+1;
 
-		x += 1;
-		k -= 1;
+		ll temp = k / 2;
+		x += temp * (B-A);
+		k -= temp * 2;
+
+		while (k > 0) {
+			k -= 1;
+			x += 1;
+		}
 	}
 
 	cout << (max({n, x})) << endl;
