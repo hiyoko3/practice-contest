@@ -13,7 +13,12 @@ at-coder/agc/*/*
 # other event
 at-coder/keyence2020/*
 !at-coder/keyence2020/*.cpp
+
 at-coder/hitachi2020/*
 !at-coder/hitachi2020/*.cpp
+
 at-coder/panasonic2020/*
 !at-coder/panasonic2020/*.cpp
+
+at-coder/yahoo2019/*
+!at-coder/yahoo2019/*.cpp
