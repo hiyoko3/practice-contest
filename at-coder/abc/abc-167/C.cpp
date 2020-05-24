@@ -87,36 +87,71 @@ ll combination(ll n, ll m) {
 	return (p * modinv(div)) % MOD;
 }
 
-int N, M, X;
-int minval = int(1e5)*12;
+// int N, M, X;
+// int minval = int(1e5)*12;
 
-void dfs(vector<int> C, vector< vector<int> > A, vector<int> ans, int temp, int idx){
-	rep(i, idx, N) {
-		// 加算
-		temp += C[i];
-		rep(j, M) {
-			ans[j] += A[i][j];
-		}
+// void dfs(vector<int> C, vector< vector<int> > A, vector<int> ans, int temp, int idx){
+// 	rep(i, idx, N) {
+// 		// 加算
+// 		temp += C[i];
+// 		rep(j, M) {
+// 			ans[j] += A[i][j];
+// 		}
 		
-		dfs(C, A, ans, temp, i+1);
+// 		dfs(C, A, ans, temp, i+1);
 
-		// 判定
-		bool ok = true;
-		rep(i, M) {
-			if (ans[i] < X) ok = false;
-		}
-		// 最小値更新
-		if (ok && temp < minval) minval = temp;
+// 		// 判定
+// 		bool ok = true;
+// 		rep(i, M) {
+// 			if (ans[i] < X) ok = false;
+// 		}
+// 		// 最小値更新
+// 		if (ok && temp < minval) minval = temp;
 
-		// 元に戻す
-		temp -= C[i];
-		rep(j, M) {
-			ans[j] -= A[i][j];
-		}
-	}
-}
+// 		// 元に戻す
+// 		temp -= C[i];
+// 		rep(j, M) {
+// 			ans[j] -= A[i][j];
+// 		}
+// 	}
+// }
+// int main() {
+// 	cin >> N >> M >> X;
+// 	vector<int> C(N);
+// 	vector< vector<int> > A(N);
+
+// 	rep(i, N) {
+// 		cin >> C[i];
+// 		A[i].resize(M);
+
+// 		rep(j, M) {
+// 			cin >> A[i][j];
+// 		}
+// 	}
+
+// 	vector<bool> is_ok(N, false);
+// 	vector<int> check(M, 0);
+// 	rep(i, N) {
+// 		rep(j, M) {
+// 			check[j] += A[i][j];
+// 		}
+// 	}
+// 	rep(i, M) {
+// 		if (check[i] >= X) continue;
+// 		cout << "-1" << endl;
+// 		return 0;
+// 	}
+
+// 	dfs(C, A, vector<int>(M, 0), 0, 0);
+// 	cout << minval << endl;
+//   return 0;
+// }
+
+// 別解 bit 全探索
 int main() {
+	int N, M ,X;
 	cin >> N >> M >> X;
+
 	vector<int> C(N);
 	vector< vector<int> > A(N);
 
@@ -129,20 +164,29 @@ int main() {
 		}
 	}
 
-	vector<bool> is_ok(N, false);
-	vector<int> check(M, 0);
-	rep(i, N) {
-		rep(j, M) {
-			check[j] += A[i][j];
+	int ans = 1001001001;
+	// 1 << 3 => 0001 << 3 => 1000 = 8
+	rep(s, 1<<N) {
+		int cost = 0;
+		vector<int> d(M);
+		rep(i, N) {
+			if(s >> i & 1) {
+				cost += C[i];
+				rep(j, M) {
+					d[j] += A[i][j];
+				}
+			}
 		}
-	}
-	rep(i, M) {
-		if (check[i] >= X) continue;
-		cout << "-1" << endl;
-		return 0;
+
+		bool ok = true;
+		rep(j, M) {
+			if (d[j] < X) ok = false;
+		}
+
+		if (ok) ans = min({ans, cost});
 	}
 
-	dfs(C, A, vector<int>(M, 0), 0, 0);
-	cout << minval << endl;
-  return 0;
+	if (ans == 10010010) cout << -1 << endl;
+	else cout << ans << endl;
+	return 0;
 }
