@@ -11,10 +11,6 @@ at-coder/agc/*/*
 !at-coder/agc/*/*.cpp
 !at-coder/agc/*/*.py
 # other event
-at-coder/*2020/*
-!at-coder/*2020/*.cpp
-!at-coder/*2020/*.py
-
-at-coder/*2019/*
-!at-coder/*2019/*.cpp
-!at-coder/*2019/*.py
+at-coder/*20*/*
+!at-coder/*20*/*.cpp
+!at-coder/*20*/*.py
