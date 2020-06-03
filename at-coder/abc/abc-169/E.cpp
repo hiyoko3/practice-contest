@@ -107,6 +107,27 @@ ll combination(ll n, ll m)
 }
 
 int main() {
-	
+	int N;
+	cin >> N;
+
+	vector<ll> A(N, 0), B(N, 0);	
+	rep (i, N) {
+		cin >> A[i] >> B[i];
+	}
+
+	sort(A.begin(), A.end());
+	sort(B.begin(), B.end());
+
+	ll result = 0;
+	ll l = 0, r = 0;
+	if (N % 2 == 1) {
+		l = A[N/2];
+		r = B[N/2];
+	} else {
+		l = A[N/2-1] + A[N/2];
+		r = B[N/2-1] + B[N/2];
+	}
+	result = r - l + 1;
+	cout << result << endl;
 	return 0;
 }

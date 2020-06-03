@@ -1,4 +1,6 @@
-import math
-A,B = map(float,input().split())
-
-print(int(A*(B*1000) / 1000))
+from math import floor
+from fractions import Fraction
+a, b = input().split()
+a = int(a)
+b = Fraction(b)
+print(floor(a * b))
