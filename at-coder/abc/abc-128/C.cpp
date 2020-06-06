@@ -107,31 +107,39 @@ ll combination(ll n, ll m)
 }
 
 int main() {
-	int N;
-	cin >> N;
-	vector<ll> a(N+1, 0);
-	rep(i, N) cin >> a[i];
+	int N, M;
+	cin >> N >> M;
+	vector< vector<int> > K(M);
 
-	sort(a.begin(), a.end(), greater<ll>());
-	bool is_sunuke = true;
-	ll x = 0, y = 0;
+	rep(i, M) {
+		int k;
+		cin >> k;
+		vector<int> s(k);
+		rep(j, k) {
+			int x;
+			cin >> x; x--;
+			s[j] = x;
+		};
+		K[i] = s;
+	}
+	vector<int> p(M);
+	rep(i, M) cin >> p[i];
 
-	y += a[0];
-	rep(i, 1, N) {
-		// 奇数
-		if (is_sunuke) {
-			x += a[i];
-			x += a[i+1];
-			i++;
-		} else {
-			y += a[i];
-			y += a[i+1];
-			i++;
+	ll ans = 0;
+	rep (bit, 1 << N) {
+		bool ok = true;
+		rep (i, M) {
+			int count = 0;
+			for (auto v : K[i]) {
+				if (bit >> v & 1) count++;
+			}
+
+			if ((count % 2) != p[i]) ok = false;
 		}
-		is_sunuke = !is_sunuke;
-		// cout << x << ", " << y << endl;
+
+		if (ok) ans++;
 	}
 
-	cout << abs(x - y) << endl;
+	cout << ans << endl;
 	return 0;
 }
