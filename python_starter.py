@@ -1,13 +1,16 @@
+import sys
+# sys.exit() 強制終了
+
+# 辞書のソート
+# key
+# s = sorted(s.items(), key=lambda x:x[0])
+# val
+# s = sorted(s.items(), key=lambda x:x[1])
+
 def hello():
   print("Hello World")
 
 # hello()
 
-n = input().split()
-print(n)
-
-N = input()
-
-a = []
-a = [input() for i in range(int(N))]
-print(a)
+# 配列もこれでとれる
+N,M = map(int,input().split())
