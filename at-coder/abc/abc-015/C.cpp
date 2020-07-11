@@ -102,20 +102,54 @@ string get_alphabet(ll n) {
 
 string to_str(ll n) {
   return to_string(n);
-} 
+}
+
+void dfs(int N, int K, vector< vector<int> > T, int npos, vector<int> ans) {
+  if (ans.size() == N) {
+    int bug = 0;
+    rep(i, ans.size()) {
+      bug ^= ans[i];
+    }
+
+    if (!bug) {
+      // rep(i, ans.size()) {
+      //   cout << ans[i] << " ";
+      // }
+
+      // cout << endl;
+      // cout << (89 ^ 44 ^ 4 ^ 25 ^ 66) << endl;
+      cout << "Found" << endl;
+      exit(0);
+    }
+
+    return;
+  }
+  if (npos == N) return;
+  vector<int> t = T[npos];
+  rep(i, t.size()) {
+    ans.push_back(t[i]);
+    dfs(N, K, T, npos+1, ans);
+    ans.pop_back();
+  }
+  return;
+}
 
 int main() {
-  double N, K;
+  int N, K;
   cin >> N >> K;
-  double n = N * N * N;
+  vector< vector<int> > T(N);
 
-  // kが一回
-  ll l = (N - K) * (K - 1) * 6;
-  // kが二回
-  ll c = (N - 1) * 3;
-  // kが3回
-  ll r = 1;
-  double ans = (l + c + r) / n;
-  cout << fixed << setprecision(20) << ans << endl;
+  rep(i, N) {
+    rep(j, K) {
+      int k;
+      cin >> k;
+      T[i].push_back(k);
+    }
+  }
+
+  vector<int> ans;
+  dfs(N, K, T, 0, ans);
+
+  cout << "Nothing" << endl;
   return 0;
 }
