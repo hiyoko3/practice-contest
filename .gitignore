@@ -14,3 +14,9 @@ at-coder/agc/*/*
 at-coder/*20*/*
 !at-coder/*20*/*.cpp
 !at-coder/*20*/*.py
+
+# other service
+# other event
+paiza/*20*/*
+paiza/*20*/*.cpp
+paiza/*20*/*.py
