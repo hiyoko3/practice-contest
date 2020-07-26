@@ -100,53 +100,43 @@ string get_alphabet(ll n) {
   return string(1, 'a' + (n % 26));
 }
 
-int ans = 1000;
-void dfs(int N, vector<int> A, int dep, int temp, int prev_p, int items) {
-  if (dep == N) {
-    temp += items * prev_p;
-    // cout << "ans: " << "prev_p: " << prev_p << ", A[dep]: " << A[dep] << ", dep: " << dep << ", temp: " << temp << ", items: " << items << endl;
-    if(temp > ans) ans = temp;
-    return;
-  }
-
-  int t = temp;
-  // 初回だけ
-  if (dep == 1) {
-    // 買う
-    rep(i, (temp / prev_p) + 1) {
-      t = temp - (i * prev_p);
-      // cout << "buy: " << "prev_p: " << prev_p << ", A[dep]: " << A[dep] << ", dep: " << dep << ", temp: " << t << ", items: " << items+i << endl;
-      dfs(N, A, dep+1, t, A[dep], items + i);
-    }
-  } else {
-    bool high = (A[dep] >= prev_p) ? true : false;
-    // 前より高い
-    // 売る
-    if (high && items > 0) {
-      rep(i, items+1) {
-        t = temp + (i * A[dep]);
-        dfs(N, A, dep+1, t, A[dep], items - i);
-      }
-    } else {
-      // 買う
-      rep(i, (temp / prev_p) + 1) {
-        t = temp - (i * A[dep]);
-        dfs(N, A, dep+1, t, A[dep], items + i);
-      }
-    }
-  }
-  return;
-}
-
 int main() {
-  int N;
-  cin >> N;
-  vector<int> A(N+1, 0);
-  rep (i, N) {
-    cin >> A[i];
+  string S;
+  int Q;
+
+  cin >> S >> Q;
+
+  int one = 0;
+  bool flag = false;
+  vector<bool> b;
+  vector<int> f;
+  vector<string> c;
+  rep (i, Q) {
+    int q;
+    cin >> q;
+
+    if (q == 1) {
+      one++;
+      flag = !flag;
+      continue;
+    }
+    int F;
+    string C;
+    cin >> F >> C;
+    b.push_back(flag);
+    f.push_back(F);
+    c.push_back(C);
   }
 
-  dfs(N, A, 1, 1000, A[0], 0);
-  cout << ans << endl;
+  rep(i, b.size()) {
+    if (f[i] == 1) {
+      S = b[i] ? S + c[i] : c[i] + S;
+    } else {
+      S = b[i] ? c[i] + S : S + c[i];
+    }
+  }
+
+  if (one % 2 == 1) reverse(S.begin(), S.end());
+  cout << S << endl;
   return 0;
 }
