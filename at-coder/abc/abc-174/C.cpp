@@ -97,7 +97,7 @@ int main() {
 
   ll start = 0;
   int ans = 0;
-  while(true) {
+  rep(i, K) {
     start = (10 * start + 7) % K;
     ans++;
     if (start == 0) break;
